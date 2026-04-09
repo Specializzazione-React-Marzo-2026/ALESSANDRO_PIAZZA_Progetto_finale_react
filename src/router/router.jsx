@@ -1,9 +1,14 @@
 import { createBrowserRouter } from "react-router";
-import Layout from "../layouts/Layout";
-import routes from "./routes";
-import Homepage from "../views/Homepage";
-import Searchpage from "../views/Searchpage";
 import { getAllGenres, getAllGamesLoader, getSearchedGames,getFilteredbyGenreGames } from "./loader";
+import Layout from "../layouts/Layout";
+import AuthLayout from "../layouts/AuthLayout";
+import Homepage from "../views/Homepage";
+
+import Login from "../views/Login";
+import Register from "../views/Register";
+import ProfilePage from "../views/ProfilePage";
+import routes from "./routes";
+import Searchpage from "../views/Searchpage";
 
 const router = createBrowserRouter([
   {
@@ -43,6 +48,25 @@ const router = createBrowserRouter([
       },
     ],
   },
+  {
+    path: '/auth',
+    Component : AuthLayout,
+      children:[
+        {
+          path: routes.login,
+          Component: Login,
+        },
+        {
+          path: routes.register,
+          Component: Register,
+        },
+        {
+          path: routes.profile,
+          Component: ProfilePage,
+        }
+        
+      ]
+  }
 ]);
 
 export default router;
