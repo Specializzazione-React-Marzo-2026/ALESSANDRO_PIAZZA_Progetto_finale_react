@@ -115,6 +115,11 @@ const router = createBrowserRouter([
     path: routes.detail,
     Component: DetailPage,
     loader: getGameDetails,
+    hydrateFallbackElement: (
+      <div className=" loading_page">
+        <div className="loading_spinner"></div>
+      </div>
+    ),
   },
 ]);
 

@@ -194,6 +194,14 @@ h3,
   color: var(--color-yellow-primary);
 }
 
+/* Mobile genre strip — hide scrollbar */
+.scrollbar-none {
+  scrollbar-width: none; /* Firefox */
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
+}
+
 /* ============================
    HOVER-TEXT LINK (Detail page)
    Adapted from Uiverse.io/satyamchaudharydev
