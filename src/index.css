@@ -3,6 +3,7 @@
 @plugin "daisyui";
 @import "C:\Users\alexp\Progetti_Aulab\rehacktor\src\card_custom.css";
 @import "C:\Users\alexp\Progetti_Aulab\rehacktor\src\loading_page.css";
+@import "./scrollbar.css";
 
 
 /* --- VARIABILI E ROOT --- */
@@ -34,6 +35,8 @@
   --color-text-bright: #ffffff; /* Testo principale */
   --color-text-dim: #94a3b8; /* Testo secondario/muted */
   --color-text-dark: #1e293b; /* Testo scuro per elementi chiari */
+
+  --auth-header-height: 4.25rem;
 
   /* UI ELEMENTI */
   --radius-gaming: 4px; /* Bordi più squadrati tipici del gaming */

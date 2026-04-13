@@ -22,6 +22,24 @@ export async function getAllGamesLoader() {
   );
 }
 
+export async function getAuthHeroImageLoader() {
+  const games = await fetchGamesList(
+    `https://api.rawg.io/api/games?key=${import.meta.env.VITE_RAWG_KEY}&metacritic=90,100&ordering=-metacritic&page_size=50`,
+  );
+
+  const imagePool = games
+    .map((game) => game?.background_image)
+    .filter(Boolean);
+
+  if (imagePool.length === 0) {
+    return { bgImage: null };
+  }
+
+  return {
+    bgImage: imagePool[Math.floor(Math.random() * imagePool.length)],
+  };
+}
+
 export async function getSearchedGames({ params }) {
   return fetchGamesList(
     `https://api.rawg.io/api/games?key=${import.meta.env.VITE_RAWG_KEY}&search=${params.slug}&page_size=20`,

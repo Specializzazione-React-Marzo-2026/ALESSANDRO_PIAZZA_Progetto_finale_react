@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router";
 import {
   getAllGenres,
   getAllGamesLoader,
+  getAuthHeroImageLoader,
   getSearchedGames,
   getFilteredbyGenreGames,
   getFilteredByDeveloperGames,
@@ -96,10 +97,12 @@ const router = createBrowserRouter([
       {
         path: routes.login,
         Component: Login,
+        loader: getAuthHeroImageLoader,
       },
       {
         path: routes.register,
         Component: Register,
+        loader: getAuthHeroImageLoader,
       },
       {
         path: routes.profile,

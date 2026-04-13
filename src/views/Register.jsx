@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router";
+import { Link, useLoaderData, useNavigate } from "react-router";
 import { useContext } from "react";
 import { UserContext } from "../context/user-context";
 import routes from "../router/routes";
@@ -15,6 +15,7 @@ export default function Register() {
   const { signUp } = useContext(UserContext);
 
   const navigate = useNavigate();
+  const { bgImage } = useLoaderData();
 
   const onSubmit = async (user_data) => {
     await signUp({
@@ -32,8 +33,13 @@ export default function Register() {
   };
 
   return (
-    <section className="register-screen">
-      <div className="register-card">
+    <section className="register-split">
+      <div className="register-split__image">
+        {bgImage && <img src={bgImage} alt="Random game" />}
+        <div className="register-split__overlay" />
+      </div>
+
+      <div className="register-split__form">
         <div className="register-card__brand">
           <img
             src="/favicon.svg"
@@ -42,85 +48,85 @@ export default function Register() {
           />
           <div>
             <p className="register-card__label">Square Games</p>
-            <p className="register-card__subcopy">Register</p>
+            <p className="register-card__subcopy">Pagina di registrazione</p>
           </div>
         </div>
 
         <form onSubmit={handleSubmit(onSubmit)} className="register-form">
-          <div className="register-form__split">
+            <div className="register-form__split">
+              <div className="register-form__group">
+                <label htmlFor="first_name">Nome</label>
+                <input
+                  id="first_name"
+                  type="text"
+                  placeholder="Alex"
+                  {...register("first_name", { required: true })}
+                />
+                {errors.first_name && (
+                  <span className="register-form__error">Il nome è richiesto</span>
+                )}
+              </div>
+
+              <div className="register-form__group">
+                <label htmlFor="last_name">Cognome</label>
+                <input
+                  id="last_name"
+                  type="text"
+                  placeholder="Player"
+                  {...register("last_name", { required: true })}
+                />
+                {errors.last_name && (
+                  <span className="register-form__error">Il cognome è richiesto</span>
+                )}
+              </div>
+            </div>
+
             <div className="register-form__group">
-              <label htmlFor="first_name">First name</label>
+              <label htmlFor="username">Username</label>
               <input
-                id="first_name"
+                id="username"
                 type="text"
-                placeholder="Alex"
-                {...register("first_name", { required: true })}
+                placeholder="square.runner"
+                {...register("username", { required: true })}
               />
-              {errors.first_name && (
-                <span className="register-form__error">First name is required</span>
+              {errors.username && (
+                <span className="register-form__error">Lo username è richiesto</span>
               )}
             </div>
 
             <div className="register-form__group">
-              <label htmlFor="last_name">Last name</label>
+              <label htmlFor="email">Email</label>
               <input
-                id="last_name"
-                type="text"
-                placeholder="Player"
-                {...register("last_name", { required: true })}
+                id="email"
+                type="email"
+                placeholder="you@example.com"
+                {...register("email", { required: true })}
               />
-              {errors.last_name && (
-                <span className="register-form__error">Last name is required</span>
+              {errors.email && (
+                <span className="register-form__error">L'email è richiesta</span>
               )}
             </div>
-          </div>
 
-          <div className="register-form__group">
-            <label htmlFor="username">Username</label>
-            <input
-              id="username"
-              type="text"
-              placeholder="square.runner"
-              {...register("username", { required: true })}
-            />
-            {errors.username && (
-              <span className="register-form__error">Username is required</span>
-            )}
-          </div>
-
-          <div className="register-form__group">
-            <label htmlFor="email">Email</label>
-            <input
-              id="email"
-              type="email"
-              placeholder="you@example.com"
-              {...register("email", { required: true })}
-            />
-            {errors.email && (
-              <span className="register-form__error">Email is required</span>
-            )}
-          </div>
-
-          <div className="register-form__group">
-            <label htmlFor="password">Password</label>
-            <input
-              id="password"
-              type="password"
-              placeholder="Choose a secure password"
-              {...register("password", { required: true })}
-            />
-            {errors.password && (
-              <span className="register-form__error">Password is required</span>
-            )}
-          </div>
+            <div className="register-form__group">
+              <label htmlFor="password">Password</label>
+              <input
+                id="password"
+                type="password"
+                placeholder="Scegli una password sicura"
+                {...register("password", { required: true })}
+              />
+              {errors.password && (
+                <span className="register-form__error">La password è richiesta</span>
+              )}
+            </div>
 
           <button type="submit" className="register-form__submit">
-            Create account
+            Crea account
           </button>
         </form>
 
         <p className="register-card__footer">
-          Already have access? <Link to={routes.login}>Login now</Link>
+          Hai già un account? <Link to={routes.login}>Accedi ora</Link>
         </p>
       </div>
     </section>

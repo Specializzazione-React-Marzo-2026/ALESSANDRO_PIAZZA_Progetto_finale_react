@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router";
+import { Link, useLoaderData, useNavigate } from "react-router";
 import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { UserContext } from "../context/user-context";
@@ -14,6 +14,7 @@ export default function Login() {
   } = useForm();
 
   const navigate = useNavigate();
+  const { bgImage } = useLoaderData();
 
   const onSubmit = async (user_data) => {
     await login({
@@ -24,8 +25,13 @@ export default function Login() {
   };
 
   return (
-    <section className="login-screen">
-      <div className="login-card">
+    <section className="login-split">
+      <div className="login-split__image">
+        {bgImage && <img src={bgImage} alt="Random game" />}
+        <div className="login-split__overlay" />
+      </div>
+
+      <div className="login-split__form">
         <div className="login-card__brand">
           <img
             src="/favicon.svg"
@@ -34,7 +40,7 @@ export default function Login() {
           />
           <div>
             <p className="login-card__label">Square Games</p>
-            <p className="login-card__subcopy">Login</p>
+            <p className="login-card__subcopy">Pagina di login</p>
           </div>
         </div>
 
@@ -48,28 +54,28 @@ export default function Login() {
             />
           </label>
           {errors.email && (
-            <span className="login-form__error">Email is required</span>
+            <span className="login-form__error">L'email è richiesta</span>
           )}
 
           <label className="login-form__field">
             <span>Password</span>
             <input
               type="password"
-              placeholder="Your password"
+              placeholder="La tua password"
               {...register("password", { required: true })}
             />
           </label>
           {errors.password && (
-            <span className="login-form__error">Password is required</span>
+            <span className="login-form__error">La password è richiesta</span>
           )}
 
           <button type="submit" className="login-form__submit">
-            Login
+            Accedi
           </button>
         </form>
 
         <p className="login-card__footer">
-          New here? <Link to={routes.register}>Create your account</Link>
+          Nuovo qui? <Link to={routes.register}>Crea il tuo account</Link>
         </p>
       </div>
     </section>

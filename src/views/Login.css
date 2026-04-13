@@ -1,38 +1,60 @@
-.login-screen {
-  position: relative;
+/* ── Split layout ── */
+.login-split {
+  display: flex;
+  height: calc(100dvh - var(--auth-header-height));
   overflow: hidden;
-  min-height: calc(100vh - 10rem);
-  display: grid;
-  place-items: center;
-  padding: 4rem 1.5rem 5rem;
 }
 
-.login-card {
-  width: min(100%, 440px);
-  margin: 0 auto;
+.login-split__image,
+.login-split__form {
+  overflow: hidden;
+  height: 100%;
+  transition: flex 0.8s ease-in-out;
+}
+
+.login-split__image {
+  flex: 65;
   position: relative;
-  display: grid;
-  gap: 1.5rem;
-  padding: 2rem;
-  border: 1px solid rgba(148, 163, 184, 0.14);
-  border-radius: 1.5rem;
-  background: linear-gradient(180deg, rgba(13, 27, 53, 0.94), rgba(7, 14, 28, 0.9));
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.26);
 }
 
-.login-card::before {
-  content: "";
+.login-split__form {
+  flex: 35;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.5rem;
+  padding: 3rem 2.5rem;
+}
+
+/* Hover or focus-within: form expands 35 → 40, image shrinks 65 → 60 */
+.login-split:has(.login-split__form:hover) .login-split__form,
+.login-split:has(.login-split__form:focus-within) .login-split__form {
+  flex: 40;
+}
+
+.login-split:has(.login-split__form:hover) .login-split__image,
+.login-split:has(.login-split__form:focus-within) .login-split__image {
+  flex: 60;
+}
+
+/* Image panel */
+.login-split__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.login-split__overlay {
   position: absolute;
-  inset: 1px;
-  border-radius: calc(1.5rem - 1px);
-  background: linear-gradient(160deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0));
-  opacity: 0.3;
+  inset: 0;
+  background: linear-gradient(90deg, transparent 60%, rgba(7, 14, 28, 0.95) 100%),
+              linear-gradient(180deg, transparent 70%, rgba(7, 14, 28, 0.6) 100%);
   pointer-events: none;
 }
 
+/* ── Brand / form (no card wrapper) ── */
 .login-card__brand {
-  position: relative;
-  z-index: 1;
   display: flex;
   gap: 1rem;
   align-items: center;
@@ -47,8 +69,6 @@
 .login-card__label,
 .login-card__subcopy,
 .login-card__footer {
-  position: relative;
-  z-index: 1;
 }
 
 .login-card__label {
@@ -67,8 +87,6 @@
 }
 
 .login-form {
-  position: relative;
-  z-index: 1;
   display: grid;
   gap: 1rem;
 }
@@ -160,13 +178,24 @@
   color: var(--color-yellow-hover);
 }
 
-@media (max-width: 640px) {
-  .login-screen {
-    padding-top: 3rem;
+@media (max-width: 768px) {
+  .login-split {
+    flex-direction: column;
+    height: auto;
+    min-height: calc(100dvh - var(--auth-header-height));
   }
 
-  .login-card {
+  .login-split__image {
+    flex: none;
+    height: 30vh;
+  }
+
+  .login-split__form {
+    flex: 1;
     padding: 1.4rem;
-    border-radius: 1.2rem;
+  }
+
+  .login-split__overlay {
+    background: linear-gradient(180deg, transparent 40%, rgba(7, 14, 28, 0.95) 100%);
   }
 }
