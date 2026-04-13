@@ -72,13 +72,20 @@ export default function ProfilePage() {
     return (
       <main className="profile-shell">
         <section className="profile-panel profile-panel--empty">
-          <span className="profile-badge">Account area</span>
-          <h1 className="profile-title">Sessione non disponibile</h1>
-          <p className="profile-lead">
+          <span className="profile-badge mb-5">Account area</span>
+          <h1 className="profile-title mb-5">Sessione non disponibile</h1>
+          <div className="profile-lead mb-5" id="card_login_failed">
             Effettua l&apos;accesso per vedere il tuo profilo e modificare i
             dati.
-          </p>
-        </section>
+          </div>
+          <Link
+            className="profile-button profile-button--primary inline-block mt-4"
+            to={routes.login}
+          >
+            Accedi ora
+          </Link>
+          </section>  
+
       </main>
     );
   }
@@ -111,8 +118,8 @@ export default function ProfilePage() {
         <div className="profile-hero">
           <div className="profile-hero__content">
             <span className="profile-badge mb-5">Player profile</span>
-            <h1 className="profile-title">Control Room</h1>
-            <p className="profile-lead">
+            <h1 className="profile-title mb-5">Control Room</h1>
+            <p className="profile-lead mb-5">
               Tutti i dettagli del tuo account in una vista piu leggibile, con
               accesso rapido alle modifiche principali.
             </p>

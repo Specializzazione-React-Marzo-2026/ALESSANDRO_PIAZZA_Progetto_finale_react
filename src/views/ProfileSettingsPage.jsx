@@ -144,9 +144,9 @@ export default function ProfileSettingsPage() {
     return (
       <main className="profile-shell">
         <section className="profile-panel profile-panel--empty">
-          <span className="profile-badge">Profile settings</span>
-          <h1 className="profile-title">Accesso richiesto</h1>
-          <p className="profile-lead">
+          <span className="profile-badge mb-5">Profile settings</span>
+          <h1 className="profile-title mb-5">Accesso richiesto</h1>
+          <p className="profile-lead mb-5">
             Devi effettuare il login prima di modificare il profilo.
           </p>
         </section>

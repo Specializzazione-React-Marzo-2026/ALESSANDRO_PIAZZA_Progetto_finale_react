@@ -17,7 +17,9 @@ export default function Navbar() {
 
   const { user, profile, signOut } = useContext(UserContext);
 
-  const [avatarUrl, setAvatarUrl] = useState(profile?.avatar_url ? null : Placeholder);
+  const [avatarUrl, setAvatarUrl] = useState(
+    profile?.avatar_url ? null : Placeholder,
+  );
 
   useEffect(() => {
     if (!profile?.avatar_url) {
@@ -91,43 +93,37 @@ export default function Navbar() {
 
         {/* Nav links */}
         <div className="flex items-center gap-5 text-sm font-medium">
-          <Link
-            className="navbar-home-link"
-            to={routes.home}
-          >
+          <Link className="navbar-home-link" to={routes.home}>
             Home
           </Link>
 
           {!user ? (
             <>
-              <Link
-                className="navbar-home-link"
-                to={routes.login}
-              >
-                Login
+              <Link className="navbar-home-link" to={routes.login}>
+                Accedi
               </Link>
-              <Link
-                className="btn-glow btn-glow--yellow"
-                to={routes.register}
-              >
-                Register
+              <Link className="btn-glow btn-glow--yellow" to={routes.register}>
+                Registrati
               </Link>
             </>
           ) : (
             <>
-             <Link to ={routes.profile} className="flex items-center gap-1.5 ">
-              {profile?.username && (
-                <span className="flex items-center gap-1.5 Profile-navbar-custom-link">
-                  <img
-                    src={avatarUrl}
-                    alt="Avatar"
-                    className="h-6 w-6 rounded-full object-cover ring-1 ring-[#fef08a]/30"
-                    onError={(e) => { e.currentTarget.onerror = null; e.currentTarget.src = Placeholder; }}
-                  />
-                  {profile.username}
-                </span>
-              )}
-               </Link>
+              <Link to={routes.profile} className="flex items-center gap-1.5 ">
+                {profile?.username && (
+                  <span className="flex items-center gap-1.5 Profile-navbar-custom-link">
+                    <img
+                      src={avatarUrl}
+                      alt="Avatar"
+                      className="h-6 w-6 rounded-full object-cover ring-1 ring-[#fef08a]/30"
+                      onError={(e) => {
+                        e.currentTarget.onerror = null;
+                        e.currentTarget.src = Placeholder;
+                      }}
+                    />
+                    {profile.username}
+                  </span>
+                )}
+              </Link>
               <button
                 onClick={handleLogout}
                 className="btn-glow btn-glow--danger btn-glow--no-reflect"

@@ -73,17 +73,16 @@
     0 0 20px var(--color-yellow-primary), 0 0 40px var(--color-yellow-primary);
 }
 
-
-
-
-
-
-
 /* APPLICAZIONE STILI BASE */
 body {
   font-family: var(--font-exo2);
   background-color: var(--color-main-bg);
   color: var(--color-text-bright);
+}
+
+#card_login_failed {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
 }
 
 h1,
