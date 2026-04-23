@@ -109,20 +109,18 @@ export default function Navbar() {
           ) : (
             <>
               <Link to={routes.profile} className="flex items-center gap-1.5 ">
-                {profile?.username && (
-                  <span className="flex items-center gap-1.5 Profile-navbar-custom-link">
-                    <img
-                      src={avatarUrl}
-                      alt="Avatar"
-                      className="h-6 w-6 rounded-full object-cover ring-1 ring-[#fef08a]/30"
-                      onError={(e) => {
-                        e.currentTarget.onerror = null;
-                        e.currentTarget.src = Placeholder;
-                      }}
-                    />
-                    {profile.username}
-                  </span>
-                )}
+                <span className="flex items-center gap-1.5 Profile-navbar-custom-link">
+                  <img
+                    src={avatarUrl}
+                    alt="Avatar"
+                    className="h-6 w-6 rounded-full object-cover ring-1 ring-[#fef08a]/30"
+                    onError={(e) => {
+                      e.currentTarget.onerror = null;
+                      e.currentTarget.src = Placeholder;
+                    }}
+                  />
+                  {profile?.username}
+                </span>
               </Link>
               <button
                 onClick={handleLogout}

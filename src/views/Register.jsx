@@ -60,10 +60,12 @@ export default function Register() {
                   id="first_name"
                   type="text"
                   placeholder="Alex"
-                  {...register("first_name", { required: true })}
+                  {...register("first_name", {
+                    required: "Il nome è richiesto",
+                  })}
                 />
                 {errors.first_name && (
-                  <span className="register-form__error">Il nome è richiesto</span>
+                  <span className="register-form__error">{errors.first_name.message}</span>
                 )}
               </div>
 
@@ -73,10 +75,13 @@ export default function Register() {
                   id="last_name"
                   type="text"
                   placeholder="Player"
-                  {...register("last_name", { required: true })}
+                  {...register("last_name", {
+                    required: "Il cognome è richiesto",
+                    pattern: { value: /^\S+$/, message: "Il cognome non può contenere spazi" },
+                  })}
                 />
                 {errors.last_name && (
-                  <span className="register-form__error">Il cognome è richiesto</span>
+                  <span className="register-form__error">{errors.last_name.message}</span>
                 )}
               </div>
             </div>
@@ -87,10 +92,13 @@ export default function Register() {
                 id="username"
                 type="text"
                 placeholder="square.runner"
-                {...register("username", { required: true })}
+                {...register("username", {
+                required: "Lo username è richiesto",
+                pattern: { value: /^\S+$/, message: "Lo username non può contenere spazi" },
+              })}
               />
               {errors.username && (
-                <span className="register-form__error">Lo username è richiesto</span>
+                <span className="register-form__error">{errors.username.message}</span>
               )}
             </div>
 
@@ -100,10 +108,13 @@ export default function Register() {
                 id="email"
                 type="email"
                 placeholder="you@example.com"
-                {...register("email", { required: true })}
+                {...register("email", {
+                required: "L'email è richiesta",
+                pattern: { value: /^\S+$/, message: "L'email non può contenere spazi" },
+              })}
               />
               {errors.email && (
-                <span className="register-form__error">L'email è richiesta</span>
+                <span className="register-form__error">{errors.email.message}</span>
               )}
             </div>
 
@@ -113,10 +124,13 @@ export default function Register() {
                 id="password"
                 type="password"
                 placeholder="Scegli una password sicura"
-                {...register("password", { required: true })}
+                {...register("password", {
+                required: "La password è richiesta",
+                pattern: { value: /^\S+$/, message: "La password non può contenere spazi" },
+              })}
               />
               {errors.password && (
-                <span className="register-form__error">La password è richiesta</span>
+                <span className="register-form__error">{errors.password.message}</span>
               )}
             </div>
 
