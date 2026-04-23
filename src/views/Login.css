@@ -26,17 +26,6 @@
   padding: 3rem 2.5rem;
 }
 
-/* Hover or focus-within: form expands 35 → 40, image shrinks 65 → 60 */
-.login-split:has(.login-split__form:hover) .login-split__form,
-.login-split:has(.login-split__form:focus-within) .login-split__form {
-  flex: 40;
-}
-
-.login-split:has(.login-split__form:hover) .login-split__image,
-.login-split:has(.login-split__form:focus-within) .login-split__image {
-  flex: 60;
-}
-
 /* Image panel */
 .login-split__image img {
   width: 100%;
@@ -65,11 +54,6 @@
   width: 3.2rem;
   height: 3.2rem;
   filter: drop-shadow(0 0 12px rgba(254, 240, 138, 0.12));
-}
-
-.login-card__label,
-.login-card__subcopy,
-.login-card__footer {
 }
 
 .login-card__label {
@@ -207,28 +191,60 @@
   font-size: 1.1rem;
 }
 
+/* 1. Rimuovi le regole di hover/focus-within globali e mettile qui: */
+@media (min-width: 769px) {
+  .login-split:has(.login-split__form:hover) .login-split__form,
+  .login-split:has(.login-split__form:focus-within) .login-split__form {
+    flex: 40;
+  }
+
+  .login-split:has(.login-split__form:hover) .login-split__image,
+  .login-split:has(.login-split__form:focus-within) .login-split__image {
+    flex: 60;
+  }
+}
+
+/* 2. Ottimizzazione della Media Query Mobile */
 @media (max-width: 768px) {
   .login-split {
     flex-direction: column;
     height: auto;
-    min-height: calc(100dvh - var(--auth-header-height));
+    min-height: 100dvh; /* Copre tutto lo schermo */
+    overflow-y: auto; /* Permette lo scroll se il form è lungo */
   }
 
   .login-split__image {
-    flex: none;
-    height: 30vh;
+    flex: none; /* Disabilita il comportamento flex-grow */
+    height: 25vh; /* Altezza fissa ridotta per dare spazio al form */
+    min-height: 200px;
+    width: 100%;
   }
 
   .login-split__form {
-    flex: 1;
-    padding: 1.4rem;
+    flex: 1; /* Prende tutto lo spazio rimanente */
+    padding: 2rem 1.5rem;
+    /* Reset degli effetti di espansione per sicurezza */
+    transition: none;
   }
 
   .login-split__overlay {
+    /* Gradient verticale per mobile */
     background: linear-gradient(
       180deg,
-      transparent 40%,
-      rgba(7, 14, 28, 0.95) 100%
+      transparent 0%,
+      rgba(7, 14, 28, 0.8) 100%
     );
+  }
+}
+
+@media (max-width: 480px) {
+  .login-card__label {
+    font-size: 0.9rem;
+  }
+  .login-form__field input {
+    padding: 0.75rem;
+  }
+  .login-split__form {
+    gap: 1rem;
   }
 }

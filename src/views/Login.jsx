@@ -73,7 +73,7 @@ export default function Login() {
               />
               <button
                 type="button"
-                className="register-form__show-password"
+                className="login-form__show-password"
                 onClick={() => setShowPassword((prev) => !prev)}
               >
                 {/* Molto più semplice e leggibile */}
