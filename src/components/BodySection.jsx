@@ -1,15 +1,16 @@
-import { FaPaperPlane, FaTrash, FaUserAstronaut } from "react-icons/fa6";
+import { FaPaperPlane, FaTrash } from "react-icons/fa6";
 import supabase from "../database/supabase";
 import { useContext, useEffect, useRef, useState } from "react";
 import { UserContext } from "../context/user-context";
+import Placeholder from "../assets/Portrait_Placeholder.png";
 import "./Reviews.css";
 
-function AvatarImg({ avatarUrl, fallback }) {
-  const [src, setSrc] = useState(null);
+function AvatarImg({ avatarUrl }) {
+  const [src, setSrc] = useState(Placeholder);
 
   useEffect(() => {
     if (!avatarUrl) {
-      setSrc(null);
+      setSrc(Placeholder);
       return;
     }
 
@@ -23,23 +24,22 @@ function AvatarImg({ avatarUrl, fallback }) {
       .createSignedUrl(avatarUrl, 3600)
       .then(({ data, error }) => {
         if (error || !data?.signedUrl) {
-          setSrc(null);
+          setSrc(Placeholder);
         } else {
           setSrc(data.signedUrl);
         }
       });
   }, [avatarUrl]);
 
-  if (!src) {
-    return fallback || <FaUserAstronaut />;
-  }
-
   return (
     <img
       src={src}
-      alt="avatar"
+      alt="Avatar utente"
       className="review-avatar-img"
-      onError={() => setSrc(null)}
+      onError={(event) => {
+        event.currentTarget.onerror = null;
+        setSrc(Placeholder);
+      }}
     />
   );
 }
@@ -156,10 +156,7 @@ export default function BodySection({ game }) {
       {ownerId ? (
         <form className="reviews-form" onSubmit={handleSubmit}>
           <div className="reviews-form__avatar">
-            <AvatarImg
-              avatarUrl={profile?.avatar_url}
-              fallback={<FaUserAstronaut />}
-            />
+            <AvatarImg avatarUrl={profile?.avatar_url} />
           </div>
           <div className="reviews-form__body">
             <textarea
@@ -205,10 +202,7 @@ export default function BodySection({ game }) {
           reviews.map((review) => (
             <article key={review.id} className="review-card">
               <div className="review-card__avatar">
-                <AvatarImg
-                  avatarUrl={review.profiles?.avatar_url}
-                  fallback={<FaUserAstronaut />}
-                />
+                <AvatarImg avatarUrl={review.profiles?.avatar_url} />
               </div>
               <div className="review-card__content">
                 <div className="review-card__header">

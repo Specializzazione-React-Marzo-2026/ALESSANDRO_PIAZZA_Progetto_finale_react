@@ -221,12 +221,21 @@ h3,
   text-transform: uppercase;
   text-decoration: none;
   color: transparent;
+  
+  /* Bordo grigio iniziale */
   -webkit-text-stroke: 1px var(--text-stroke-color);
+  
   cursor: pointer;
   background: none;
   border: none;
-  padding: 0;
-  margin: 0;
+  
+  /* Allineamento */
+  padding-left: 13px; /* Spazio prima della scritta */
+  margin-left: 0px;
+  box-sizing: border-box; /* Importante per la simmetria */
+
+  /* AGGIUNGI QUESTA TRANSIZIONE: rende fluido il passaggio a trasparente */
+  transition: -webkit-text-stroke-color 0.3s ease;
 }
 
 .detail-link .detail-link__hover {
@@ -239,6 +248,16 @@ h3,
   -webkit-text-stroke: 1px var(--animation-color);
   transition: width 0.5s ease;
   white-space: nowrap;
+
+  /* AGGIUNGI QUESTO: per far combaciare le lettere gialle a quelle grigie */
+  padding-left: 5px; 
+  box-sizing: border-box;
+}
+
+/* AZIONI ALL'HOVER */
+.detail-link:hover {
+  /* La scritta grigia sotto diventa trasparente */
+  -webkit-text-stroke-color: transparent;
 }
 
 .detail-link:hover .detail-link__hover {
@@ -246,7 +265,6 @@ h3,
   filter: drop-shadow(0 0 18px var(--animation-color));
 }
 
-/* Sidebar variant: prevent wrapping, clip at <li> level */
 aside .detail-link {
   white-space: nowrap;
 }
